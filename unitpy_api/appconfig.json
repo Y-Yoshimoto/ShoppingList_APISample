@@ -1,0 +1,15 @@
+{
+    "applications": {
+        "ShoppingList": {
+            "type": "python",
+            "processes": 1,
+            "path": "/www/ShoppingList",
+            "module": "wsgi"
+        }
+    },
+    "listeners": {
+        "*:8300": {
+            "application": "ShoppingList"
+        }
+    }
+}
