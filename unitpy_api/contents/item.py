@@ -13,7 +13,8 @@ def get(environ, start_response):
         ids = parse_qs(environ.get('QUERY_STRING'))['id']
         ids_str = ",".join(ids)
         sqlQuery = 'SELECT * FROM t_shoppinglist WHERE id in (' + ids_str + ');'
-    except:
+    except Exception as error:
+        print(error)
         start_response('400 Bad request', [('Content-Type', 'text/html')])
         return [b"400 Bad request."]
     ## DB接続
@@ -32,10 +33,11 @@ def post(environ, start_response):
     fromData = wsgi_input.read(int(environ.get('CONTENT_LENGTH', 0))).decode('utf-8')
     ## パラメータチェック,パース,SQL生成
     try:
-        productName = json.loads(fromData)['productName']
+        itemName = json.loads(fromData)['itemName']
         price = json.loads(fromData)['price']
-        sqlQuery = 'INSERT INTO t_shoppinglist VALUES (NULL,"'+ str(productName)+ '",'+ str(price) +',0);'
-    except:
+        sqlQuery = 'INSERT INTO t_shoppinglist VALUES (NULL,"'+ str(itemName)+ '",'+ str(price) +',0);'
+    except Exception as error:
+        print(error)
         start_response('400 Bad request', [('Content-Type', 'text/html')])
         return [b"400 Bad request."]
     ## DB接続
@@ -52,10 +54,11 @@ def put(environ, start_response):
     # 受信データのパース
     try:
         id = json.loads(fromData)['id']
-        productName = json.loads(fromData)['productName']
+        itemName = json.loads(fromData)['itemName']
         price = json.loads(fromData)['price']
-        sqlQuery = 'UPDATE t_shoppinglist SET productName="'+ str(productName)+ '", price='+ str(price) +' WHERE id = '+ str(id)+';'
-    except:
+        sqlQuery = 'UPDATE t_shoppinglist SET productName="'+ str(itemName)+ '", price='+ str(price) +' WHERE id = '+ str(id)+';'
+    except Exception as error:
+        print(error)
         start_response('400 Bad request', [('Content-Type', 'text/html')])
         return [b"400 Bad request."]
     # DB接続
@@ -72,7 +75,8 @@ def delete(environ, start_response):
         ids = parse_qs(environ.get('QUERY_STRING'))['id']
         ids_str = ",".join(ids)
         sqlQuery = 'UPDATE t_shoppinglist SET flag = 1 WHERE id in (' + ids_str + ');'
-    except:
+    except Exception as error:
+        print(error)
         start_response('400 Bad request', [('Content-Type', 'text/html')])
         return [b"400 Bad request."]
     ## DB接続
