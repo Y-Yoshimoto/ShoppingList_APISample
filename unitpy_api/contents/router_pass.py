@@ -16,8 +16,8 @@ def not_found(environ, start_response):
 routes = [
     ('/','GET', alive),
     ('/showList','GET', showList.getList),
-    ('/product','GET', item.get),
-    ('/product','POST', item.post),
-    ('/product','PUT', item.put),
-    ('/product','DELETE', item.delete),
+    ('/item','GET', item.get),
+    ('/item','POST', item.post),
+    ('/item','PUT', item.put),
+    ('/item','DELETE', item.delete),
 ]
