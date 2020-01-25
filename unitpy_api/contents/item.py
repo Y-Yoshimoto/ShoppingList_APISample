@@ -5,71 +5,78 @@ from urllib.parse import parse_qs
 import mysqlDAO as DAO
 
 ############ item ############ 
+############### get 
 def get(environ, start_response):
     start_response('200 OK', [('Content-Type', 'application/json')])
-    ids = parse_qs(environ.get('QUERY_STRING'))['id']
+    ## パラメータチェック,パース,SQL生成
+    try:
+        ids = parse_qs(environ.get('QUERY_STRING'))['id']
+        ids_str = ",".join(ids)
+        sqlQuery = 'SELECT * FROM t_shoppinglist WHERE id in (' + ids_str + ');'
+    except:
+        start_response('400 Bad request', [('Content-Type', 'text/html')])
+        return [b"400 Bad request."]
+    ## DB接続
     dao = DAO.PDAO()
-    dao.connectDB()
-    list = []
-    # レスポンスデータ生成
-    for id in ids:
-        sqlQuery = 'SELECT * FROM t_shoppinglist WHERE id = ' + id + ';'
-        row = dao.selectQuery(sqlQuery)
-        print(row)
-        list.append({"id":row[0][0], "商品":row[0][1], "価格":row[0][2], "Flag":row[0][3]})
-        response = json.dumps(list, ensure_ascii=False).encode('utf-8')
-    dao.closeDB()
+    print(sqlQuery)
+    result = dao.selectQuery(sqlQuery)
+    ## レスポンス
+    data = list(map(lambda row: {"id": row[0], "商品": row[1], "価格": row[2], "flag": row[3]}, result))
+    response = json.dumps(data, ensure_ascii=False).encode('utf-8')
     return response
 
-
+############### post 
 def post(environ, start_response):
-    start_response('200 OK', [('Content-Type', 'application/json')])
+    start_response('200 OK', [('Content-Type', 'text/html')])
     wsgi_input = environ["wsgi.input"]
-    # 受信データのパース
     fromData = wsgi_input.read(int(environ.get('CONTENT_LENGTH', 0))).decode('utf-8')
-    productName = json.loads(fromData)['productName']
-    price = json.loads(fromData)['price']
-    # データベースコネクション
+    ## パラメータチェック,パース,SQL生成
+    try:
+        productName = json.loads(fromData)['productName']
+        price = json.loads(fromData)['price']
+        sqlQuery = 'INSERT INTO t_shoppinglist VALUES (NULL,"'+ str(productName)+ '",'+ str(price) +',0);'
+    except:
+        start_response('400 Bad request', [('Content-Type', 'text/html')])
+        return [b"400 Bad request."]
+    ## DB接続
     dao = DAO.PDAO()
-    dao.connectDB()
-    sqlQuery = 'INSERT INTO t_shoppinglist VALUES (NULL,"'+ str(productName)+ '",'+ str(price) +',0);'
     print(sqlQuery)
-    dao.InsertQuery(sqlQuery)
-    dao.closeDB()
-    response = [b"200 OK."]
-    return response
+    dao.TransactionQuery(sqlQuery)
+    return [b"200 OK."]
 
-
+############### put 
 def put(environ, start_response):
-    start_response('200 OK', [('Content-Type', 'application/json')])
+    start_response('200 OK', [('Content-Type', 'text/html')])
     wsgi_input = environ["wsgi.input"]
-    # 受信データのパース
     fromData = wsgi_input.read(int(environ.get('CONTENT_LENGTH', 0))).decode('utf-8')
-    id = json.loads(fromData)['id']
-    productName = json.loads(fromData)['productName']
-    price = json.loads(fromData)['price']
-    # データベースコネクション
+    # 受信データのパース
+    try:
+        id = json.loads(fromData)['id']
+        productName = json.loads(fromData)['productName']
+        price = json.loads(fromData)['price']
+        sqlQuery = 'UPDATE t_shoppinglist SET productName="'+ str(productName)+ '", price='+ str(price) +' WHERE id = '+ str(id)+';'
+    except:
+        start_response('400 Bad request', [('Content-Type', 'text/html')])
+        return [b"400 Bad request."]
+    # DB接続
     dao = DAO.PDAO()
-    dao.connectDB()
-    sqlQuery = 'UPDATE t_shoppinglist SET productName="'+ str(productName)+ '", price='+ str(price) +' WHERE id = '+ str(id)+';'
     print(sqlQuery)
-    dao.UpdateQuery(sqlQuery)
-    dao.closeDB()
-    return response
+    dao.TransactionQuery(sqlQuery)
+    return [b"200 OK."]
 
-
+############### delete
 def delete(environ, start_response):
     start_response('200 OK', [('Content-Type', 'application/json')])
-    ids = parse_qs(environ.get('QUERY_STRING'))['id']
-    # データベースコネクション
+    ## パラメータチェック,パース,SQL生成
+    try:
+        ids = parse_qs(environ.get('QUERY_STRING'))['id']
+        ids_str = ",".join(ids)
+        sqlQuery = 'UPDATE t_shoppinglist SET flag = 1 WHERE id in (' + ids_str + ');'
+    except:
+        start_response('400 Bad request', [('Content-Type', 'text/html')])
+        return [b"400 Bad request."]
+    ## DB接続
     dao = DAO.PDAO()
-    dao.connectDB()
-    list = []
-    # データ削除
-    for id in ids:
-        sqlQuery = 'UPDATE t_shoppinglist SET flag = 1 WHERE id = '+ str(id)+';'
-        row = dao.DeleteQuery(sqlQuery)
-    dao.closeDB()
-    response = [b"200 OK."]
-
-    return response
+    print(sqlQuery)
+    result = dao.TransactionQuery(sqlQuery)
+    return [b"200 OK."]

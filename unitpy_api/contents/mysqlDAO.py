@@ -29,27 +29,11 @@ class PDAO:
 
 # Query
     def selectQuery(self, sqlQuery):
-        # self.cursor = self.connector.cursor()
         self.cursor.execute(sqlQuery)
         return self.cursor.fetchall()
 
-    def InsertQuery(self, sqlQuery):
-        self.cursor = self.connector.cursor()
-        # SQL生成
-        self.cursor.execute(sqlQuery)
-        self.connector.commit()
-        return "0"
-
-    def UpdateQuery(self, sqlQuery):
-        self.cursor = self.connector.cursor()
-        # SQL生成
-        self.cursor.execute(sqlQuery)
-        self.connector.commit()
-        return "0"
-
-    def DeleteQuery(self, sqlQuery):
-        self.cursor = self.connector.cursor()
-        # SQL生成
+    def TransactionQuery(self, sqlQuery):
+        # SQL発行
         self.cursor.execute(sqlQuery)
         self.connector.commit()
         return "0"
