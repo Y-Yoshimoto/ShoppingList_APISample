@@ -1,6 +1,13 @@
 # Unitのセットアップについて
 
-## テストリクエスト
+## showListテストリクエスト
+### GET 
+    curl -v -X GET 'http://127.0.0.1/shoppinglist_api/showList'
+    curl -v -X GET 'http://127.0.0.1/shoppinglist_api/showList?flag=0'
+    curl -v -X GET 'http://127.0.0.1/shoppinglist_api/showList?flag=1'
+    curl -v -X GET 'http://127.0.0.1/shoppinglist_api/showList?flag=1&flag=2'
+
+## itemテストリクエスト
 ### GET 
     curl -v -X GET 'http://127.0.0.1/shoppinglist_api/product?id=1&id=2'
 ### POST

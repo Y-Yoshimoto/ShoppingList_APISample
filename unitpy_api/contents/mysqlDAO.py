@@ -29,8 +29,7 @@ class PDAO:
 
 # Query
     def selectQuery(self, sqlQuery):
-        self.cursor = self.connector.cursor()
-        # SQL生成
+        # self.cursor = self.connector.cursor()
         self.cursor.execute(sqlQuery)
         return self.cursor.fetchall()
 

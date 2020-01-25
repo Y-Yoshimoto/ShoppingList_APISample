@@ -67,7 +67,7 @@ def delete(environ, start_response):
     list = []
     # データ削除
     for id in ids:
-        sqlQuery = 'UPDATE t_shoppinglist SET deleteFlag = 1 WHERE id = '+ str(id)+';'
+        sqlQuery = 'UPDATE t_shoppinglist SET flag = 1 WHERE id = '+ str(id)+';'
         row = dao.DeleteQuery(sqlQuery)
     dao.closeDB()
     response = [b"200 OK."]
