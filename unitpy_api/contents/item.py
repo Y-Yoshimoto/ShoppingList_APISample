@@ -57,7 +57,7 @@ def put(environ, start_response):
         id = json.loads(fromData)['id']
         itemName = json.loads(fromData)['itemName']
         quantity = json.loads(fromData)['quantity']
-        sqlQuery = 'UPDATE t_shoppinglist SET productName="'+ str(itemName)+ '", quantity='+ str(quantity) +' WHERE id = '+ str(id)+';'
+        sqlQuery = 'UPDATE t_shoppinglist SET itemName="'+ str(itemName)+ '", quantity='+ str(quantity) +' WHERE id = '+ str(id)+';'
     except Exception as error:
         print(error)
         start_response('400 Bad request', [('Content-Type', 'text/html')])

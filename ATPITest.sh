@@ -23,3 +23,6 @@ echo '\n\n item DELETE'
 curl -X DELETE 'http://127.0.0.1/shoppinglist_api/item?id=3'
 curl -X DELETE 'http://127.0.0.1/shoppinglist_api/item?id=5'
 
+## showListテストリクエスト
+echo 'showList'
+curl -X GET 'http://127.0.0.1/shoppinglist_api/showList'
