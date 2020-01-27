@@ -21,6 +21,7 @@ def getList(environ, start_response):
     result = dao.selectQuery(sqlQuery)
 
     # レスポンスデータ生成
-    data = list(map(lambda row: {"id": row[0], "商品": row[1], "価格": row[2], "flag": row[3]}, result))
-    response = json.dumps(data, ensure_ascii=False).encode('utf-8')
+    ## data = list(map(lambda row: {"id": row[0], "itemName": row[1], "quantity": row[2], "flag": row[3]}, result))
+    ## response = json.dumps(data, ensure_ascii=False).encode('utf-8')
+    response = json.dumps(result, ensure_ascii=False).encode('utf-8')
     return response

@@ -20,6 +20,8 @@ class PDAO:
 
 # 接続
     def connectDB(self):
+        self.cursor = self.connector.cursor(dictionary=True)
+    def connectDB_RAW(self):
         self.cursor = self.connector.cursor()
 
 # 切断

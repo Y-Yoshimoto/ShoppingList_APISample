@@ -22,8 +22,9 @@ def get(environ, start_response):
     print(sqlQuery)
     result = dao.selectQuery(sqlQuery)
     ## レスポンス
-    data = list(map(lambda row: {"id": row[0], "商品": row[1], "価格": row[2], "flag": row[3]}, result))
-    response = json.dumps(data, ensure_ascii=False).encode('utf-8')
+    ## data = list(map(lambda row: {"id": row[0], "itemName": row[1], "quantity": row[2], "flag": row[3]}, result))
+    ## response = json.dumps(data, ensure_ascii=False).encode('utf-8')
+    response = json.dumps(result, ensure_ascii=False).encode('utf-8')
     return response
 
 ############### post 
@@ -34,8 +35,8 @@ def post(environ, start_response):
     ## パラメータチェック,パース,SQL生成
     try:
         itemName = json.loads(fromData)['itemName']
-        price = json.loads(fromData)['price']
-        sqlQuery = 'INSERT INTO t_shoppinglist VALUES (NULL,"'+ str(itemName)+ '",'+ str(price) +',0);'
+        quantity = json.loads(fromData)['quantity']
+        sqlQuery = 'INSERT INTO t_shoppinglist VALUES (NULL,"'+ str(itemName)+ '",'+ str(quantity) +',0);'
     except Exception as error:
         print(error)
         start_response('400 Bad request', [('Content-Type', 'text/html')])
@@ -55,8 +56,8 @@ def put(environ, start_response):
     try:
         id = json.loads(fromData)['id']
         itemName = json.loads(fromData)['itemName']
-        price = json.loads(fromData)['price']
-        sqlQuery = 'UPDATE t_shoppinglist SET productName="'+ str(itemName)+ '", price='+ str(price) +' WHERE id = '+ str(id)+';'
+        quantity = json.loads(fromData)['quantity']
+        sqlQuery = 'UPDATE t_shoppinglist SET productName="'+ str(itemName)+ '", quantity='+ str(quantity) +' WHERE id = '+ str(id)+';'
     except Exception as error:
         print(error)
         start_response('400 Bad request', [('Content-Type', 'text/html')])
