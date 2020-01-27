@@ -7,5 +7,8 @@ restart:
 	docker-compose down
 	docker-compose up -d
 
-reload:
+appRestart:
 	docker-compose restart unitpy_api
+
+reload:
+	docker-compose up -d --build

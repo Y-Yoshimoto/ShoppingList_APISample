@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="jp" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <!-- viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--CSS -->
+    <style>
+
+    </style>
+    <!--Title -->
+    <title>買い物リスト</title>
+</head>
+
+<body>
+    <div class="container-md">
+        <div class="row">
+            <!--一覧表-->
+            <div class="col-md-7">
+                <table class="table table-striped table-hover">
+                    <caption id="getListMessage">更新:</caption>
+                    <!-- ヘッダー　------------------------------->
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>No.</th>
+                            <th scope="col">商品</th>
+                            <th scope="col">個数</th>
+                            <th scope="col">状態</th>
+                        </tr>
+                    </thead>
+                    <!-- データ　------------------------------->
+                    <tbody id="showLiset_th">
+                    </tbody>
+                </table>
+            </div>
+            <!-- 管理 -->
+            <div class="col-md-5">
+                <h3 class="h3 mb-3 font-weight-normal">一覧更新</h3>
+                <form class="form-Item">
+
+                    <select type="text" id="input_ID" class="form-control" placeholder="ID"></select>
+                    <input type="text" id="input_itemName" class="form-control" placeholder="商品">
+                    <input type="text" id="input_quantity" class="form-control" placeholder="個数">
+
+                    <button class="btn btn-lg btn-info" id="itemGET" type="submit">取得</button>
+                    <button class="btn btn-lg btn-primary" id="itemPOST" type="submit">追加</button>
+                    <button class="btn btn-lg btn-warning" id="itemPUT" type="submit">更新</button>
+                    <button class="btn btn-lg btn-danger" id="itemDELETE" type="submit">完了</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--jquery, Bootstrap, popper -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+        integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- include JavaScript -->
+    <script src="./showListAPICall.js"></script>
+    <script src="./itemAPICall.js"></script>
+
+</body>
+
+</html>

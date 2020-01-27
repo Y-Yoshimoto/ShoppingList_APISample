@@ -32,11 +32,12 @@ def post(environ, start_response):
     start_response('200 OK', [('Content-Type', 'text/html')])
     wsgi_input = environ["wsgi.input"]
     fromData = wsgi_input.read(int(environ.get('CONTENT_LENGTH', 0))).decode('utf-8')
+    print(fromData)
     ## パラメータチェック,パース,SQL生成
     try:
         itemName = json.loads(fromData)['itemName']
         quantity = json.loads(fromData)['quantity']
-        sqlQuery = 'INSERT INTO t_shoppinglist VALUES (NULL,"'+ str(itemName)+ '",'+ str(quantity) +',0);'
+        sqlQuery = 'INSERT INTO t_shoppinglist VALUES (NULL,"'+ str(itemName)+ '","'+ str(quantity) +'",0);'
     except Exception as error:
         print(error)
         start_response('400 Bad request', [('Content-Type', 'text/html')])
@@ -57,7 +58,7 @@ def put(environ, start_response):
         id = json.loads(fromData)['id']
         itemName = json.loads(fromData)['itemName']
         quantity = json.loads(fromData)['quantity']
-        sqlQuery = 'UPDATE t_shoppinglist SET itemName="'+ str(itemName)+ '", quantity='+ str(quantity) +' WHERE id = '+ str(id)+';'
+        sqlQuery = 'UPDATE t_shoppinglist SET itemName="'+ str(itemName)+ '", quantity="'+ str(quantity) +'" WHERE id = '+ str(id)+';'
     except Exception as error:
         print(error)
         start_response('400 Bad request', [('Content-Type', 'text/html')])
@@ -71,6 +72,7 @@ def put(environ, start_response):
 ############### delete
 def delete(environ, start_response):
     start_response('200 OK', [('Content-Type', 'application/json')])
+    print(environ.get('QUERY_STRING'))
     ## パラメータチェック,パース,SQL生成
     try:
         ids = parse_qs(environ.get('QUERY_STRING'))['id']
@@ -85,3 +87,5 @@ def delete(environ, start_response):
     print(sqlQuery)
     result = dao.TransactionQuery(sqlQuery)
     return [b"200 OK."]
+
+    
