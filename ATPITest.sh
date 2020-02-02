@@ -27,6 +27,11 @@ curl -X DELETE 'http://127.0.0.1/shoppinglist_api/item' -H 'Content-Type: applic
 echo 'showList'
 curl -X GET 'http://127.0.0.1/shoppinglist_api/showList'
 
-
+echo '\n\n Sendmail'
 ## Sendmailテスト
 curl -X POST 'http://127.0.0.1/sendmail_api/sendmail' -H 'Content-Type: application/json' -d '{"from":"root@localdomain","to":"test@localdomain","subject":"TestMail","text":"This is TestMail."}'
+
+## Sendmailテスト
+curl -X POST 'http://127.0.0.1/shoppinglist_api/sendmailList' -H 'Content-Type: application/json' -d '{"to":"test@localdomain"}'
+
+echo 'END'

@@ -6,7 +6,7 @@ LABEL  maintainer "y.yoshimoto"
 RUN apt-get -y update\
     && apt-get install -y python3-pip mariadb-client libmariadbclient-dev\
     && apt-get clean
-RUN pip3 install requests python-dateutil mysql-connector urllib3
+RUN pip3 install requests python-dateutil mysql-connector urllib3 requests
 
 # アプリケーションを配置
 RUN mkdir -p /www/ShoppingList
