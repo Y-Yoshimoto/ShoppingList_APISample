@@ -8,7 +8,8 @@ restart:
 	docker-compose up -d
 
 appRestart:
-	docker-compose restart unitpy_api
+	# docker-compose restart unitpy_api
+	docker-compose up -d --build sendmail_api
 
 reload:
 	docker-compose up -d --build

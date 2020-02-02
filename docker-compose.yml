@@ -55,4 +55,3 @@ services:
             - "8040:8040"
         environment:
                 TZ: 'Asia/Tokyo'
-        
