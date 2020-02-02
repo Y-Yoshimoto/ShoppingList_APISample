@@ -1,6 +1,6 @@
 FROM nginx/unit:1.14.0-python3.7
 # https://github.com/nginx/unit/tree/master/pkg/docker
-MAINTAINER y.yoshimoto
+LABEL  maintainer "y.yoshimoto"
 
 # Install pip
 RUN apt-get -y update\

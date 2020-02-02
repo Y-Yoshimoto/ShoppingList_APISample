@@ -47,3 +47,12 @@ services:
             - "587:587"
         environment:
                 TZ: 'Asia/Tokyo'
+    sendmail_api:
+        build: express_api
+        image: express_api
+        restart: always
+        ports:
+            - "8040:8040"
+        environment:
+                TZ: 'Asia/Tokyo'
+        

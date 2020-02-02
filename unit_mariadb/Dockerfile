@@ -1,5 +1,5 @@
 FROM mariadb
-MAINTAINER y.yoshimoto
+LABEL  maintainer "y.yoshimoto"
 
 # 設定ファイルのコピー
 COPY my.cnf /etc/mysql/my.cnf

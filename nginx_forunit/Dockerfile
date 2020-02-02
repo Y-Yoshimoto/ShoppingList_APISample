@@ -1,5 +1,5 @@
 FROM nginx
-MAINTAINER y.yoshimoto
+LABEL  maintainer "y.yoshimoto"
 
 # コンテツファイルの設置
 COPY contents/* /usr/share/nginx/html/
