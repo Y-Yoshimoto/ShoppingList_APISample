@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+}
+
+.form-mail {
+    width: 100%;
+    max-width: 500px;
+    min-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-mail .checkbox {
+    font-weight: 400;
+}
+
+.form-mail .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-mail textarea[id="textMail"] {
+    margin-bottom: 10%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.form-box {
+    height: 100%;
+    width: 100%;
+    min-width: 330px;
+    display: -ms-flexbox;
+    /*display: flex;*/
+    -ms-flex-align: center;
+    margin: 0 auto;
+    /*ブラウザの中央に配置
+    text-align: center;*/
+    color: #373A3C;
+    background-color: #FAFDFF;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="jp" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <!-- viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--CSS -->
+    <link rel="stylesheet" type="text/css" href="page.css">
+    <style>
+
+    </style>
+    <!--Title -->
+    <title>メール送信</title>
+</head>
+
+<body>
+
+    <div class="form-box">
+        <!-- フォーム -->
+        <form class="form-mail">
+
+            <h3 class="h3 mb-3 font-weight-normal"><br>メール送信</h3>
+            <!-- インプット -->
+            宛先メールアドレス
+            <label for="inputEmail" class="sr-only">宛先メールアドレス</label>
+            <input type="email" id="toMail" class="form-control" placeholder="name@example.com" required autofocus>
+            件名
+            <label for="inputSubject" class="sr-only">件名</label>
+            <input type="text" id="subjectMail" class="form-control" placeholder="件名" required>
+            本文
+            <label for="inputText" class="sr-only">本文</label>
+            <textarea type="text" id="textMail" class="form-control" placeholder="本文" rows="4" required></textarea>
+
+            <button class="btn btn-lg btn-primary btn-block" id="sendmailAPICall" type="submit">送信</button>
+            <!-- SysMessage -->
+            <p class="SysMessage" id="SysMessage"> </p>
+
+            <!-- <p class="mt-5 mb-3 text-muted">&copy;2019</p> -->
+        </form>
+    </div>
+
+    <!--jquery, Bootstrap, popper -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+        integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- include JavaScript -->
+    <script src="./sendmailAPICall.js"></script>
+
+</body>
+
+</html>
