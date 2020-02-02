@@ -107,11 +107,15 @@ $(function () {
     $('#itemDELETE').click(function () {
         //多重送信防止//ボタンの無効化
         var button = $(this);
+        var sed_data = {
+            'id': String($("#input_ID").val()),
+        }
         button.attr("disabled", true);
         $.ajax({//DELETE
             type: "DELETE",
             url: "../shoppinglist_api/item",    //URL
-            data: { 'id': String($("#input_ID").val()) },
+            data: JSON.stringify(sed_data),   //送信JSONデータ
+            contentType: 'application/JSON',
             dataType: "text"               //受信データ
         }).done(function (rcv_data) {
             // 受信データ処理

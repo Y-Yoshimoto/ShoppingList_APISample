@@ -72,12 +72,13 @@ def put(environ, start_response):
 ############### delete
 def delete(environ, start_response):
     start_response('200 OK', [('Content-Type', 'application/json')])
-    print(environ.get('QUERY_STRING'))
+    wsgi_input = environ["wsgi.input"]
+    fromData = wsgi_input.read(int(environ.get('CONTENT_LENGTH', 0))).decode('utf-8')
     ## パラメータチェック,パース,SQL生成
     try:
-        ids = parse_qs(environ.get('QUERY_STRING'))['id']
-        ids_str = ",".join(ids)
-        sqlQuery = 'UPDATE t_shoppinglist SET flag = 1 WHERE id in (' + ids_str + ');'
+        id = json.loads(fromData)['id']
+        id_str = ",".join(id)
+        sqlQuery = 'UPDATE t_shoppinglist SET flag = 1 WHERE id in (' + id_str + ');'
     except Exception as error:
         print(error)
         start_response('400 Bad request', [('Content-Type', 'text/html')])

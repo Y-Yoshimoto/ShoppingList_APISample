@@ -12,6 +12,7 @@ curl -X GET 'http://127.0.0.1/shoppinglist_api/item?id=1&id=2'
 echo '\n\n item POST'
 curl -X POST 'http://127.0.0.1/shoppinglist_api/item' -H 'Content-Type: application/json' -d '{"itemName":"イカ","quantity":"1杯"}'
 curl -X POST 'http://127.0.0.1/shoppinglist_api/item' -H 'Content-Type: application/json' -d '{"itemName":"たこ","quantity":"5匹"}'
+curl -X POST 'http://127.0.0.1/shoppinglist_api/item' -H 'Content-Type: application/json' -d '{"itemName":"猫型ロボット","quantity":"1体"}'
 
 ### PUT
 echo '\n\n item PUT'
@@ -20,8 +21,7 @@ curl -X PUT 'http://127.0.0.1/shoppinglist_api/item' -H 'Content-Type: applicati
 
 ### DELETE
 echo '\n\n item DELETE'
-curl -X DELETE 'http://127.0.0.1/shoppinglist_api/item?id=3'
-curl -X DELETE 'http://127.0.0.1/shoppinglist_api/item?id=5'
+curl -X DELETE 'http://127.0.0.1/shoppinglist_api/item' -H 'Content-Type: application/json' -d '{"id":"3"}'
 
 ## showListテストリクエスト
 echo 'showList'
