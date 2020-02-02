@@ -38,3 +38,12 @@ services:
             TZ: Asia/Tokyo
             # MYSQL_USER: unit
             # MYSQL_PASSWORD: unit
+    mail:
+        image: postfix_custom
+        build: postfix_custom
+        restart: always
+        ports:
+            - "25:25"
+            - "587:587"
+        environment:
+                TZ: 'Asia/Tokyo'
