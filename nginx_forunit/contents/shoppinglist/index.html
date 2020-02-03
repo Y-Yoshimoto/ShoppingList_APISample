@@ -9,9 +9,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!--CSS -->
-    <style>
-
-    </style>
+    <style></style>
     <!--Title -->
     <title>買い物リスト</title>
 </head>
@@ -38,18 +36,25 @@
                 </table>
             </div>
             <!-- 管理 -->
-            <div class="col-md-5">
-                <h3 class="h3 mb-3 font-weight-normal">一覧更新</h3>
-                <form class="form-Item">
-
+            <div class="col-md-5"><br>
+                <h3 class="h3 mb-3 font-weight-normal">買い物リスト更新</h3>
+                <form>
                     <select type="text" id="input_ID" class="form-control" placeholder="ID"></select>
                     <input type="text" id="input_itemName" class="form-control" placeholder="商品">
                     <input type="text" id="input_quantity" class="form-control" placeholder="個数">
-
+                    <br>
                     <button class="btn btn-lg btn-info" id="itemGET" type="submit">取得</button>
                     <button class="btn btn-lg btn-primary" id="itemPOST" type="submit">追加</button>
                     <button class="btn btn-lg btn-warning" id="itemPUT" type="submit">更新</button>
                     <button class="btn btn-lg btn-danger" id="itemDELETE" type="submit">完了</button>
+                </form><br><br>
+                <h4 class="h4 mb-3 font-weight-normal">買い物リスト送信</h4>
+                <form class="form-row align-items-center">
+                    <div class="col"><input type="text" id="toMail" class="form-control form-control-lg"
+                            placeholder="name@example.com">
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-lg btn-info" id="sendmailList" type="submit">送信</button></div>
                 </form>
             </div>
         </div>
@@ -69,7 +74,7 @@
     <!-- include JavaScript -->
     <script src="./showListAPICall.js"></script>
     <script src="./itemAPICall.js"></script>
-
+    <script src="./sendmailListAPICall.js"></script>
 </body>
 
 </html>
