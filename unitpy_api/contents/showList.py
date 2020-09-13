@@ -44,8 +44,8 @@ def sendmailList(environ, start_response):
         print(str(message))
 
         ## メール送信
-        url = 'http://shoppinglist_apisample_sendmail_api_1:8040/sendmail'
-        message = {'from': 'root@localdomain','to': toMail,'subject': '買い物リスト','text': str(message)}
+        url = 'http://express_api:8040/sendmail'
+        message = {'from': 'SoppingList@SoppingList.com','to': toMail,'subject': '買い物リスト','text': str(message)}
         response = requests.post(url, json=message)        
         print(response.status_code)
 

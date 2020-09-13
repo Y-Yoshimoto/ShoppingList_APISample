@@ -3,7 +3,7 @@ var nodemailer = require("nodemailer");
 
 //SMTP指定_25
 var smtp25 = nodemailer.createTransport({
-    host: 'shoppinglist_apisample_mail_1',
+    host: 'Sandmail',
     port: 25
 });
 /*SMTP指定_587

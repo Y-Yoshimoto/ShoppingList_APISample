@@ -1,59 +1,51 @@
-version: '3'
+version: "3"
 services:
     nginx_forunit:
-        build: "nginx_forunit"
-        image: "nginx_forunit"
+        build: nginx_forunit
+        image: nginx_forunit
         ports:
             - "80:80"
             - "443:443"
-        depends_on:
-            - "unitpy_api"
         environment:
             TZ: Asia/Tokyo
-        volumes:
-             - ./nginx_forunit/contents/:/usr/share/nginx/html/
-
-    # APIServer_unitpy_api
+        #volumes:
+        #     - ./nginx_forunit/contents/:/usr/share/nginx/html/
     unitpy_api:
-        build: "unitpy_api"
-        image: "unitpy_api"
-        restart: "no"
+        build: unitpy_api
+        image: unitpy_api
+        restart: "always"
         expose:
             - "8300"
         environment:
             TZ: Asia/Tokyo
             PYTHONUNBUFFERED: "no"
-        volumes:
-             - ./unitpy_api/contents/:/www/ShoppingList/
-
+        #volumes:
+        #    - ./unitpy_api/contents/:/www/ShoppingList/
     unit_mariadb:
         build: unit_mariadb
         image: unit_mariadb
-        ports:
-            - "33306:3306"
-        restart: "no"
+        expose:
+            - "3306"
+        restart: "always"
         environment:
             MYSQL_ROOT_PASSWORD: unit
             MYSQL_DATABASE: unit
             TZ: Asia/Tokyo
-            # MYSQL_USER: unit
-            # MYSQL_PASSWORD: unit
-    mail:
-        image: postfix_custom
+    Sandmail:
         build: postfix_custom
+        image: postfix_custom
         restart: always
-        ports:
-            - "25:25"
-            - "587:587"
+        expose:
+            - "25"
+            - "587"
         dns: 8.8.8.8
         environment:
-                TZ: 'Asia/Tokyo'
-
-    sendmail_api:
+            TZ: "Asia/Tokyo"
+    express_api:
         build: express_api
         image: express_api
         restart: always
-        ports:
-            - "8040:8040"
+        expose:
+            - "8040"
         environment:
-                TZ: 'Asia/Tokyo'
+            TZ: "Asia/Tokyo"

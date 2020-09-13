@@ -10,7 +10,8 @@ RUN pip3 install requests python-dateutil mysql-connector urllib3 requests
 
 # アプリケーションを配置
 RUN mkdir -p /www/ShoppingList
-# COPY contents/*.py /www/ShoppingList/
+COPY contents/*.py /www/ShoppingList/
 
 ## コンフィグファイル設置
 COPY appconfig.json /docker-entrypoint.d/
+EXPOSE 8300

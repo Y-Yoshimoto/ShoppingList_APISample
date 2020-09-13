@@ -8,7 +8,7 @@ import mysql.connector as mydb
 class PDAO:
     def __init__(self):
         self.connector = mydb.connect(
-            host='shoppinglist_apisample_unit_mariadb_1',
+            host='unit_mariadb',
             port=3306,
             database='shoppinglist',
             user='shoppinglistUser',
