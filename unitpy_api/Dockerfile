@@ -1,4 +1,4 @@
-FROM nginx/unit:1.14.0-python3.7
+FROM nginx/unit:1.19.0-python3.7
 # https://github.com/nginx/unit/tree/master/pkg/docker
 LABEL  maintainer "y.yoshimoto"
 
@@ -6,7 +6,9 @@ LABEL  maintainer "y.yoshimoto"
 RUN apt-get -y update\
     && apt-get install -y python3-pip mariadb-client libmariadbclient-dev\
     && apt-get clean
-RUN pip3 install requests python-dateutil mysql-connector urllib3 requests
+#pip freeze > requirements.lock
+COPY requirements.txt /docker-entrypoint.d/requirements.txt
+RUN pip3 install -r /docker-entrypoint.d/requirements.txt && pip3 freeze > requirements.lock
 
 # アプリケーションを配置
 RUN mkdir -p /www/ShoppingList
